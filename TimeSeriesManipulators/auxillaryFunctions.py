@@ -8,3 +8,6 @@ class auxillaryFunctions:
 
     def unidimensionalClustering(self):
         pass
+
+    def gridSearch(self):
+        pass

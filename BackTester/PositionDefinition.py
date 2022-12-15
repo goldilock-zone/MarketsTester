@@ -36,5 +36,9 @@ class Position:
         else:
             raise ValueError(f'POSITION_TYPE MUST BE LONG OR SHORT | CURRENT VALUE: {self.position_type}')
 
+
     def __del__(self):
         pass
+
+if __name__ == '__main__':
+    pass

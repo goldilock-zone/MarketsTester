@@ -15,3 +15,6 @@ class Broker:
     def order_log(self):
         out_log = ""
         return out_log
+
+if __name__ == '__main__':
+    pass

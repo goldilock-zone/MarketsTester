@@ -14,12 +14,10 @@ class priceFunctions:
     def parameterIterator(self):
         pass
 
-    def gridSearch(self):
-        pass
-
     #Trend functions
     def EMA(self, graphing = False):
         #Exponential Moving Average
+        
         pass
     
     def SMA(self, graphing = False):
@@ -70,3 +68,10 @@ class priceFunctions:
     def kurtosis(self, graphing = False):
         #Using scipy
         pass
+    
+    #Tests
+    def _tests(self):
+        pass
+
+if __name__ == "__main__":
+    pass
