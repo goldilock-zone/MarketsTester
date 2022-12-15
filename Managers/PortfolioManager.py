@@ -18,6 +18,9 @@ class PortfolioManager:
     def loggingOutput(self):
         pass
 
+    def max_training_period(self):
+        pass
+
     #functions
     def time_update(self):
         pass
