@@ -1,15 +1,19 @@
 import math
 import numpy as np
 import pandas as pd
+from TimeSeriesManipulators.priceFunctions import priceFunctions
+from Managers.constantsManager import Names
+from statistics import mean
 
-class TrendModel:
+class MediumTrendModel:
     def __init__(self):
-        self.modelID = ""
+        self.modelID = "MediumTrend"
         self.leverage = 0 #default leverage amount is set to 0
-        pass
+        self.training_period = self.getTrainingPeriod()
+        self.fill_time = 'Open'
 
     def getTrainingPeriod(self):
-        pass
+        return 200
 
     def leverage(self):
         """
@@ -19,11 +23,20 @@ class TrendModel:
         """
         return self.leverage
 
-    def analyze(self) -> float:
+    def test(self, input_dict):
+
+        for ticker, data in input_dict.items():
+            pfObj = priceFunctions(data, self.getTrainingPeriod(), fill_time = Names.CLOSE)
+            averageSkew = mean(pfObj.skew(20))
+            averageKurtosis = mean(pfObj.kurtosis(20))
+            averageSgn = mean(pfObj.EMAsgn(40))
+            print(ticker, averageSgn, averageSkew, averageKurtosis)
+
+    def analyze(self, input_df) -> float:
         """
         Functions: Analyzes data for one security
         """
-        pass
+
 
     def run(self) -> pd.DataFrame:
         """

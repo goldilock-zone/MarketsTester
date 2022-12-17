@@ -4,13 +4,14 @@ import scipy
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as scst
+from Managers.constantsManager import Names
 
 class priceFunctions:
-    OPEN = 'Open'
-    HIGH = 'High'
-    LOW = 'Low'
-    CLOSE = 'Close'
-    VOLUME = 'Volume'
+    OPEN = Names.OPEN
+    HIGH = Names.HIGH
+    LOW = Names.LOW
+    CLOSE = Names.CLOSE
+    VOLUME = Names.VOLUME
 
     def __init__(self, input_df, training_period, fill_time):
 
@@ -77,6 +78,26 @@ class priceFunctions:
                 ])
 
         return ema
+
+    def EMAsgn(self, lookback, input_array = [], graphing=False):
+        out = []
+        if input_array == []:
+            input_array = self.typical_price()
+
+        ema = self.EMA(lookback, input_array, graphing = False)
+        for price, ema_val in zip(input_array, ema):
+            if price >= ema_val:
+                out.append(1)
+            elif price < ema_val:
+                out.append(-1)
+        
+        if graphing:
+            self.graphing([
+                ['EMASgn', out],
+                ['Price', input_array]
+                ])
+        
+        return out
     
     def SMA(self, lookback, input_array = [], graphing = False):
         #Simple Moving Average
@@ -92,6 +113,26 @@ class priceFunctions:
                 ])
                 
         return sma
+
+    def SMAsgn(self, lookback, input_array = [], graphing=False):
+        out = []
+        if input_array == []:
+            input_array = self.typical_price()
+
+        sma = self.SMA(lookback, input_array, graphing = False)
+        for price, sma_val in zip(input_array, sma):
+            if price >= sma_val:
+                out.append(1)
+            elif price < sma_val:
+                out.append(-1)
+        
+        if graphing:
+            self.graphing([
+                ['SMASgn', out],
+                ['Price', input_array]
+                ])
+        
+        return out
 
     def CCI(self, lookback, graphing = False):
         #Commodity Channel Index
@@ -235,7 +276,7 @@ class priceFunctions:
         
         if graphing:
             self.graphing([
-                ['LagSkew', out],
+                ['LagKurtosis', out],
                 ['Price', self.typical_price()]
                 ])
                 
